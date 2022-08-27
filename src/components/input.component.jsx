@@ -3,8 +3,8 @@ import { FiSearch } from "react-icons/fi";
 
 const Input = () => {
   return (
-    <div className="w-screen flex items-center h-[20%]">
-      <div className="max-w-[20%] mr-3 text-white">
+    <div className="w-screen flex items-center h-[20%] mb-5">
+      <div className="max-w-[20%] mr-3 text-white mt-2">
         <FiSearch size="2rem" />
       </div>
       <div className="w-[80%]  ">
@@ -18,4 +18,4 @@ const Input = () => {
   );
 };
 
-export default Input
+export default Input;

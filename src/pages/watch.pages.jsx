@@ -1,26 +1,20 @@
-
-
 import React from "react";
 import StateManagement from "../contextApi/statemanagement.contextApi";
 import { useContext } from "react";
 
 const Watch = () => {
   const { watch } = useContext(StateManagement);
-console.log(watch)
   return (
-        <div className="mt-[10rem] ">
-            {
-                watch.map(watch=>{
-                    return (
-                        <h1 className="text-red-500" key={watch.id}>{watch.name}</h1>
-                    )
-                })
-            }
-        </div>
+    <div className=" bg-white h-[100vh]">
+      <div>
+        <video src={watch.video} className="w-screen lg:h-[70vh]"></video>
+      </div>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim, debitis.
+      </p>
+      <p>{watch.name}</p>
+    </div>
   );
 };
 
-export default Bookmark;
-
-
-
+export default Watch;

@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { BsFillBookmarkFill } from "react-icons/bs";
@@ -9,7 +7,7 @@ import { BiRadio, BiBarChartSquare } from "react-icons/bi";
 
 const Navbar = () => {
   return (
-    <div className="bg-[#10141D] h-16 w-[100vw] rounded-md flex justify-between fixed top-0 z-10 items-center p-4 ">
+    <div className="bg-[#10141D] h-16 w-[100vw] rounded-md flex justify-between sticky z-50 top-0 items-center  ">
       <div className="text-white">
         <ImFilm size="2.5rem" className="text-red-500" />
       </div>
@@ -48,12 +46,10 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className=" border-2 border-white h-8 w-8 rounded-full overflow-hidden">
-        <img src={''} className="w-8 h-8 rounded-full " />
+        <img src={""} className="w-8 h-8 rounded-full " />
       </div>
     </div>
   );
 };
 
 export default Navbar;
-
-
