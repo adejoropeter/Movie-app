@@ -1,54 +1,48 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import StateManagement from "../contextApi/statemanagement.contextApi";
-import {
-  BsBookmark,
-  BsChevronDoubleLeft,
-  BsFillBookFill,
-  BsFillBookmarkFill,
-} from "react-icons/bs";
+import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-const Card = ({ src, dateReleased, title, item }) => {
-  const {
-    setBookMarked,
-    bookmarked,
-    setWatch,
-    toggle,
-    setToggle,
-    items,
-    setItems,
-  } = useContext(StateManagement);
-  console.log(bookmarked);
+// import { ImTwitch } from "react-icons/im";
+const Card = ({ dateReleased, title, item }) => {
+  const { setBookMarked, bookmarked, setWatch, items, setItems, back } =
+    useContext(StateManagement);
   const addToBookMark = (id) => {
     const bulk = items.map((item) => {
       return item.id === id ? { ...item, store: !item.store } : item;
     });
     setItems(bulk);
-    if (item.store) {
+    if (!item.store) {
       setBookMarked([...bookmarked, item]);
-      console.log(item);
     } else {
-      console.log(false);
+      const filter = bookmarked.filter((item) => {
+        return item.id !== id;
+      });
+      setBookMarked(filter);
     }
   };
+
   let navigate = useNavigate();
   const addToWatch = () => {
-    setWatch(item);
+    setWatch([item]);
     navigate("/watch");
   };
   return (
     <div className=" w-[100%]">
-      <div className="w-fit overflow-hidden relative">
-        <video
-          src={src}
-          controls
-          autoPlay
-          className="w-screen h-60 sm:w-[15rem]"
-        ></video>
+      <div className="w-[80%] h-fit overflow-hidden relative">
+        <iframe
+          className="w-screen h-60 sm:w-[15rem] sm:h-40 lg:h-40"
+          // width="560"
+          // height="315"
+          src={item.url}
+          // frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
         <div
-          className="bg-gray-300 rounded-full w-fit h-fit p-3 absolute top-6 right-8 cursor-pointer"
+          className="bg-gray-300 rounded-full w-fit h-fit p-3 absolute top-0 right-0 cursor-pointer sm:top-0 sm:right-0 md:top-0 md:right-0"
           onClick={() => addToBookMark(item.id)}
         >
-          {!item.store ? (
+          {item.store ? (
             <BsFillBookmarkFill size="1rem" />
           ) : (
             <BsBookmark size="1rem" />
@@ -62,8 +56,7 @@ const Card = ({ src, dateReleased, title, item }) => {
           <p>{dateReleased} PG</p>
         </div>
         <p className="font-bold text-lg" onClick={addToWatch}>
-          {title} The Diary Lorem ipsum dolor, sit amet consectetur adipisicing
-          elit. Cumque, rem?
+          {title} {item.name}
         </p>
       </div>
     </div>

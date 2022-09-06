@@ -1,11 +1,14 @@
-import React from "react";
+import React,{useContext} from "react";
 import { NavLink } from "react-router-dom";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { RiHome2Fill } from "react-icons/ri";
 import { ImFilm } from "react-icons/im";
 import { BiRadio, BiBarChartSquare } from "react-icons/bi";
+import Bookmark from "../pages/bookmark.pages";
+import StateManagement from "../contextApi/statemanagement.contextApi";
 
 const Navbar = () => {
+  const {bookmarked} = useContext(StateManagement)
   return (
     <div className="bg-[#10141D] h-16 w-[100vw] rounded-md flex justify-between sticky z-50 top-0 items-center  ">
       <div className="text-white">
@@ -39,10 +42,14 @@ const Navbar = () => {
         <NavLink
           to="bookmark"
           className={({ isActive }) => {
-            return isActive ? "text-white p-4" : "text-gray-500 p-4";
+            return isActive ? "text-white p-4 relative" : "text-gray-500 p-4 relative";
           }}
         >
+          <div >
+            <span className="text-red-500 absolute top-0 right-0 text-xl">{bookmarked.length}</span>
           <BsFillBookmarkFill size="1.5rem" />
+
+          </div>
         </NavLink>
       </div>
       <div className=" border-2 border-white h-8 w-8 rounded-full overflow-hidden">
