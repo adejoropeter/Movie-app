@@ -5,23 +5,22 @@ import { RiHome2Fill } from "react-icons/ri";
 import { ImFilm } from "react-icons/im";
 import { BiRadio, BiBarChartSquare } from "react-icons/bi";
 import Bookmark from "../pages/bookmark.pages";
-import StateManagement from "../contextApi/statemanagement.contextApi";
-
+import { ItemContext } from "../contextApi/statemanagement.contextApi";
 const Navbar = () => {
-  const {bookmarked} = useContext(StateManagement)
+  const {state:{bookmark}}=ItemContext()
   return (
     <div className="bg-[#10141D] h-16 w-[100vw] rounded-md flex justify-between sticky z-50 top-0 items-center  ">
-      <div className="text-white">
+      <div className="text-white ">
         <ImFilm size="2.5rem" className="text-red-500" />
       </div>
       <div className="flex">
         <NavLink
           to="/"
           className={({ isActive }) => {
-            return isActive ? "text-white p-4" : "text-gray-500 p-4";
+            return isActive ? "text-white p-4 " : "text-gray-500 p-4";
           }}
         >
-          <RiHome2Fill size="1.5rem" />
+          <RiHome2Fill size="1.5rem"/>
         </NavLink>
         <NavLink
           to="wi"
@@ -46,7 +45,7 @@ const Navbar = () => {
           }}
         >
           <div >
-            <span className="text-red-500 absolute top-0 right-0 text-xl">{bookmarked.length}</span>
+            <span className="text-red-500 absolute top-0 right-0 text-xl">{bookmark.length}</span>
           <BsFillBookmarkFill size="1.5rem" />
 
           </div>

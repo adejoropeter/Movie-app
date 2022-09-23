@@ -1,52 +1,31 @@
-import React, { useEffect, useRef, useState, useId } from "react";
+import React, { useRef, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import Navbar from "./components/navbar.component";
 import Bookmark from "./pages/bookmark.pages";
-import StateManagement from "./contextApi/statemanagement.contextApi";
 import Home from "./pages/home.pages";
 import Watch from "./pages/watch.pages";
-import MiniWatch from "./components/miniWatch.component";
-import axios from "axios";
-import { RiContactsBookLine } from "react-icons/ri";
+import MiniWatch, { MiniWatch2 } from "./components/miniWatch.component";
+import { item } from "./items";
 function App() {
-  const [bookmarked, setBookMarked] = useState([]);
   const back = useRef(null);
-  const [watch, setWatch] = useState([]);
+  const queueRef = useRef(null);
   const [miniWatch, setMiniWatch] = useState([]);
   const [search, setSearch] = useState("");
-  const [items, setItems] = useState([
-    {
-      name: "wizkidayo",
-      url: "https://www.youtube.com/embed/EiG0BNjTYE0",
-      id: useId(),
-    },
-    {
-      name: "Big Wiz",
-      url: "https://www.youtube.com/embed/mtEm1wci6qQ",
-      id: useId(),
-    },
-    {
-      name: "Machala",
-      url: "https://www.youtube.com/embed/EiG0BNjTYE0",
-      id: useId(),
-    },
-    {
-      name: "Lil Prince",
-      url: "https://www.youtube.com/embed/mtEm1wci6qQ",
-      id: useId(),
-    },
-  ]);
-  // const [resultArray, setAr] = useState([]);
+  const [hidden, setHidden] = useState(true);
+  const [queue, setQueue] = useState([]);
+  const [watchVid, setWatchVid] = useState([]);
+  // const resultArray = items.filter((item) => {
+  //   return item.name.toLowerCase().includes(search.toLowerCase());
+  // });
 
-  const resultArray = items.filter((item) => {
-    return item.name.toLowerCase().includes(search.toLowerCase());
-    // console.log('')
-  });
   return (
-    <div className="bg-[#1F2021] w-[100vw] min-h-[100vh] flex flex-col  overflow-hidden">
-      <StateManagement.Provider
+    <div className=" bg-none w-[100vw] min-h-[100vh] flex flex-col  overflow-hidden ">
+      {/* <StateManagement.Provider
         value={{
           items,
+          hidden,
+          setHidden,
           bookmarked,
           setBookMarked,
           setItems,
@@ -57,18 +36,30 @@ function App() {
           back,
           search,
           setSearch,
+          queue,
+          setQueue,
+          queueRef,
           resultArray,
+          watchVid,
+          setWatchVid,
+          handleDecrease,
+          handleIncrease,
+          state,
+          dispatch,
+          watchArr
         }}
-      >
-        <Navbar />
-        {/* <div onClick={() => {}}>Hello</div> */}
+      > */}
+      <BrowserRouter>
+        <Navbar />  
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="bookmark" element={<Bookmark />}></Route>
           <Route path="watch" element={<Watch />}></Route>
         </Routes>
         <MiniWatch />
-      </StateManagement.Provider>
+        <MiniWatch2 />
+      </BrowserRouter>
+      {/* </StateManagement.Provider> */}
     </div>
   );
 }
